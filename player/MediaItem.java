@@ -1,20 +1,19 @@
 package media;
 
-public class MediaPlayer {
-    private Renderer renderer;
+public class MediaItem extends PlaylistComponent {
+    private String title;
+    private IMediaSource source;
 
-    public MediaPlayer(Renderer renderer) {
-        this.renderer = renderer;
+    public MediaItem(String title, IMediaSource source) {
+        this.title = title;
+        this.source = source;
     }
 
-    public void setRenderer(Renderer renderer) {
-        this.renderer = renderer;
-    }
-
-    public void play(PlaylistComponent component) {
-        renderer.render("Starting playback...");
-        component.play();
-        renderer.render("Playback finished.");
+    @Override
+    public void play() {
+        source.open();
+        source.play();
+        source.close();
     }
 }
 
